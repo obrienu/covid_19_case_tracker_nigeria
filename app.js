@@ -4,12 +4,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/covid19', {
+const url = process.env.DB_URI;
+
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
