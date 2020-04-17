@@ -2,9 +2,14 @@ exports.cummStatePipeline = [
   {
     $group: {
       _id: '$state',
-      totalCases: {
+      cases: {
         $sum: '$cases',
       },
+    },
+  },
+  {
+    $addFields: {
+      state: '$_id',
     },
   },
   {
@@ -16,13 +21,13 @@ exports.cummTotalpipeline = [
   {
     $group: {
       _id: null,
-      totalCases: {
+      cases: {
         $sum: '$cases',
       },
-      totalDeaths: {
+      deaths: {
         $sum: '$deaths',
       },
-      totalDischarged: {
+      discharged: {
         $sum: '$discharged',
       },
     },

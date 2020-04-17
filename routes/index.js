@@ -14,8 +14,14 @@ router.get('/national', controller.getCummulativeNational);
 /* GET PER STATE OCCURENCE */
 router.get('/state/:state', controller.getByState);
 
+/* GET PER REGION OCCURENCE */
+router.get('/region/:region', controller.getByRegion);
+
 
 /* POST data */
 router.post('/', controller.postData);
+
+/* EDIT POST */
+router.put('/', controller.putData);
 
 module.exports = router;

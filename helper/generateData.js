@@ -39,6 +39,21 @@
   discharged: 24,
   deaths: 10,
 }; */
+
+/* const switchCases = {
+  cases: {
+    $switch: {
+      branches: genPutPipeline(states),
+    },
+  },
+}; */
+const southEast = ['Anambra', 'Abia', 'Ebonyi', 'Enugu', 'Imo'];
+const northCentral = ['Benue', 'Kogi', 'Kwara', 'Nassarawa', 'Niger', 'Plateau', 'Abuja'];
+const northEast = ['Adamawa', 'Bauchi', 'Borno', 'Gombe', 'Taraba', 'Yobe'];
+const northWest = ['Jigawa', 'Kaduna', 'Kano', 'Katsina', 'Kebbi', 'Sokoto', 'Zamfara'];
+const southSouth = ['Akwa Ibom', 'Bayelsa', 'Cross River', 'Rivers', 'Delta', 'Edo'];
+const southWest = ['Ekiti', 'Lagos', 'Ogun', 'Ondo', 'Osun', 'Oyo'];
+
 const cleanStateParam = (param) => param.split(' ')
   .map((name) => name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase())
   .join(' ');
@@ -46,6 +61,16 @@ const cleanStateParam = (param) => param.split(' ')
 const getdate = (a) => {
   const arr = a.split('-').map((val) => parseInt(val, 10));
   return new Date(arr[0], arr[1] - 1, arr[2]);
+};
+
+const getRegion = (state) => {
+  if (southEast.includes(state)) return 'South East';
+  if (northCentral.includes(state)) return 'North Central';
+  if (northEast.includes(state)) return 'North East';
+  if (northWest.includes(state)) return 'North West';
+  if (southSouth.includes(state)) return 'South South';
+  if (southWest.includes(state)) return 'South West';
+  return null;
 };
 
 const cleanData = (data) => {
@@ -62,6 +87,7 @@ const cleanData = (data) => {
       obj.state = key;
       obj.cases = data[key];
       obj.date = getdate(date);
+      obj.region = getRegion(key);
       states.push(obj);
     }
     return key;
@@ -88,7 +114,8 @@ const genNatData = (summary, date) => {
 const handleQuery = (query) => {
   const arrQueries = Object.keys(query);
 
-  if (arrQueries.length === 1 && arrQueries.includes('accummulate')) return null;
+  if ((arrQueries.length === 1 && arrQueries.includes('accumulate'))
+    || arrQueries.length === 0) return null;
 
   if (arrQueries.includes('date')) {
     const date = getdate(query.date);
@@ -112,7 +139,7 @@ const handleQuery = (query) => {
   throw new Error('Please provide the right queries, you can either use "date" or "to" and "from" together to get a range');
 };
 
-const generatePipeLine = (query, params) => {
+const generateStatePipeLine = (query, params) => {
   const state = cleanStateParam(params.state);
   const queryObj = handleQuery(query);
   const pipeline = [
@@ -130,31 +157,109 @@ const generatePipeLine = (query, params) => {
       },
     },
   ];
-  const cummPipline = {
-    $group: {
-      _id: '$state',
-      totalCases: {
-        $sum: '$cases',
+  const cummPipline = [
+    {
+      $group: {
+        _id: '$state',
+        cases: {
+          $sum: '$cases',
+        },
       },
     },
-  };
+    {
+      $addFields: {
+        state: '$_id',
+      },
+    },
+  ];
   if (queryObj) pipeline.push(queryObj);
-  if (query.accummulate === 'true') pipeline.push(cummPipline);
+  if (query.accumulate) return [...pipeline, ...cummPipline];
+  return pipeline;
+};
+
+const generateRegionPipeLine = (query, params) => {
+  const region = cleanStateParam(params.region);
+  const queryObj = handleQuery(query);
+  const pipeline = [
+    {
+      $match: {
+        region,
+      },
+    }, {
+      $sort: {
+        date: -1,
+      },
+    }, {
+      $project: {
+        __v: 0,
+      },
+    },
+  ];
+  const cummPipline = [
+    {
+      $group: {
+        _id: '$region',
+        cases: {
+          $sum: '$cases',
+        },
+      },
+    },
+    {
+      $addFields: {
+        region: '$_id',
+      },
+    },
+  ];
+  if (queryObj) pipeline.push(queryObj);
+  if (query.accumulate) return [...pipeline, ...cummPipline];
   return pipeline;
 };
 
 const generateNatPipeline = (querys) => {
   const pipeline = [{ $project: { __v: 0 } },
     { $sort: { date: -1 } }];
-  if (Object.keys(querys).length === 0) return pipeline;
+  const cummPipline = [
+    {
+      $group: {
+        _id: null,
+        cases: {
+          $sum: '$cases',
+        },
+        deaths: {
+          $sum: '$deaths',
+        },
+        discharged: {
+          $sum: '$discharged',
+        },
+      },
+    }, {
+      $project: {
+        _id: false,
+      },
+    },
+  ];
+  if (Object.keys(querys).length === 0
+    || ((Object.keys(querys).length === 1) && !querys.accumulate)) return pipeline;
+
+  if ((Object.keys(querys).length === 1)
+    && querys.accumulate) return [...pipeline, ...cummPipline];
+
   const query = handleQuery(querys);
-  pipeline.push(query);
+  if (querys.accumulate) return [query, ...cummPipline];
+
   return [query];
 };
+
+const genPutPipeline = (states) => states.map((state) => ({
+  case: { $eq: ['state', state.state] },
+  then: state.cases,
+}));
 
 module.exports = {
   cleanData,
   genNatData,
-  generatePipeLine,
+  generateStatePipeLine,
+  generateRegionPipeLine,
   generateNatPipeline,
+  genPutPipeline,
 };
