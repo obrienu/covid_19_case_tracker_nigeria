@@ -1,5 +1,6 @@
 const express = require('express');
 const controller = require('../controller/index');
+const auth = require('../middleware/auth')
 
 const router = express.Router();
 /* GET home page. */
@@ -19,9 +20,9 @@ router.get('/region/:region', controller.getByRegion);
 
 
 /* POST data */
-router.post('/', controller.postData);
+router.post('/', auth, controller.postData);
 
 /* EDIT POST */
-router.put('/', controller.putData);
+router.put('/', auth, controller.putData);
 
 module.exports = router;

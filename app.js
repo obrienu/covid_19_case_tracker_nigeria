@@ -36,5 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 }); */
 
 app.use('/api/v1/nigeria/covid-19/', indexRouter);
+app.use('/user', require('./routes/user'));
 
 module.exports = app;
