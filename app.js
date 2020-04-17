@@ -5,7 +5,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
 const cors = require('cors');
-//require('dotenv').config();
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
