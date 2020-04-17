@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
+const cors = require('cors');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -21,6 +22,7 @@ mongoose.connect(url, {
   console.error('Failed to connect to server: ', err);
 });
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(boolParser());
