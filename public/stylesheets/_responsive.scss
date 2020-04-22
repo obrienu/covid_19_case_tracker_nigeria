@@ -1,0 +1,67 @@
+@include mediaLg {
+  /* ******************************* */
+  /* *********MENU BTN*********** */
+  /* ******************************* */
+  .menu-btn {
+    display: none;
+  }
+
+  /* ******************************* */
+  /* *********NAV BAR********** */
+  /* ******************************* */
+  .nav {
+    height: 3rem;
+    border-bottom: none;
+
+    ul.links {
+      grid-template-columns: 7rem repeat(4, 1fr);
+      grid-template-rows: 3rem;
+    }
+
+    li.link {
+      a {
+        line-height: 3rem;
+      }
+    }
+  }
+
+  .nav .logo-link .logo {
+    width: 7rem;
+    height: 3rem;
+  }
+
+  main#home {
+    grid-template-columns: 25rem auto;
+    grid-template-areas: "main bg";
+    height: calc(100vh - 5.5rem);
+
+    .main-background {
+      grid-area: bg;
+      height: 100%;
+      &::after {
+        height: calc(100vh - 5.5rem);
+      }
+    }
+
+    .bg-text {
+        width: 30%;
+        position: absolute;
+        bottom: 3rem;
+        left: 3rem;
+      }
+
+    .main-section {
+      grid-area: main;
+      overflow-y: auto;
+    }
+  }
+
+  #footer{
+    height: 2.5rem;
+    color:  green;
+    background-color: #fff;
+    text-align: center;
+    line-height: 2.5rem;
+    border-top: 2px solid $yellow;
+  }
+}
