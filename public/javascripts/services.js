@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 // eslint-disable-next-line max-classes-per-file
 class DataFetcher {
@@ -20,7 +22,6 @@ class DataFetcher {
 
 class Interface {
   constructor() {
-    // eslint-disable-next-line no-undef
     this.natCases = $('.nat-value');
     this.stateContainer = $('#home-state');
     this.generateStateHtml = this.generateStateHtml.bind(this);

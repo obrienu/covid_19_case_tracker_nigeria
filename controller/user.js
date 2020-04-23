@@ -7,22 +7,30 @@ const secretKey = process.env.SECRET_KEY;
 const { ADMIN_CODE } = process.env;
 
 const validateReg = async (body) => {
-  const {
-    name, password, cpassword, email, adminCode,
-  } = body;
-  if (adminCode !== ADMIN_CODE) throw new Error('Unauthorised Access');
-  if (!email || !name || !password || !cpassword) throw new Error('Please Enter All Fields');
-  if (password !== cpassword) throw new Error('Password and Cpassword must be the same');
-  const checkUser = await User.findOne({ email });
-  if (checkUser) throw new Error('User exists already');
+  try {
+    const {
+      name, password, cpassword, email, adminCode,
+    } = body;
+    if (adminCode !== ADMIN_CODE) throw new Error('Unauthorised Access');
+    if (!email || !name || !password || !cpassword) throw new Error('Please Enter All Fields');
+    if (password !== cpassword) throw new Error('Password and Cpassword must be the same');
+    const checkUser = await User.findOne({ email });
+    if (checkUser) throw new Error('User exists already');
+  } catch (err) {
+    return err.message;
+  }
 };
 
 const validateLogin = async (body) => {
-  const { email, password } = body;
-  if (!email || !password) throw new Error('Please Enter All Fields');
-  const checkUser = await User.findOne({ email });
-  if (!checkUser) throw new Error('User Does Not Exist');
-  return checkUser;
+  try {
+    const { email, password } = body;
+    if (!email || !password) throw new Error('Please Enter All Fields');
+    const checkUser = await User.findOne({ email });
+    if (!checkUser) throw new Error('User Does Not Exist');
+    return checkUser;
+  } catch (err) {
+    return ({ Error: err.message });
+  }
 };
 
 const signToken = async (id) => {
@@ -30,19 +38,27 @@ const signToken = async (id) => {
   return token;
 };
 
+const testBcrypt = (password = 'Ulelek10$') => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  const isMatch = bcrypt.compareSync(password, hash);
+  return isMatch;
+};
+
 exports.registerUser = async (req, res) => {
   try {
     const {
       name, password, email,
     } = req.body;
-    validateReg(req.body);
+    const err = await validateReg(req.body);
+    if (err) throw new Error(err);
     const newUser = new User({
       name,
       email,
       password,
     });
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(newUser.password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(newUser.password, salt);
     newUser.password = hash;
     const user = await newUser.save();
     const token = await signToken(user.id);
@@ -60,12 +76,13 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-
 exports.login = async (req, res) => {
   try {
     const { password } = req.body;
     const user = await validateLogin(req.body);
-    const isMatch = await bcrypt.compare(password, user.password);
+    if (user.Error) throw new Error(user.Error);
+    const isMatch = bcrypt.compareSync(password, user.password);
+    testBcrypt();
     if (!isMatch) throw new Error('Invalid Credentials');
     const token = await signToken(user._id);
     res.json({

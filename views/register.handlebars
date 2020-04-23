@@ -1,0 +1,35 @@
+<main id="login">
+    <form class="register-form">
+        <div class="header">Register</div>
+        <div class="error mt-1"></div>
+        <div class="form-group mt-1">
+            <label class="input-label" for="register-name">Name</label>
+            <input class="input" required placeholder="Name" type="text" id="register-name">
+        </div>
+        <div class="form-group mt-1">
+            <label class="input-label" for="register-email">Email</label>
+            <input class="input" required placeholder="Email" type="email" id="register-email">
+        </div>
+        <div class="form-group form-insert">
+            <label class="input-label" for="register-password">Password</label>
+            <input class="input" required type="password" placeholder="Password" id="register-password">
+            <span class="input-label">View</span>
+        </div>
+        <div class="form-group form-insert">
+            <label class="input-label" for="register-cpassword">Confirm Password</label>
+            <input class="input" required type="password" placeholder="Confirm Password" id="register-cpassword">
+            <span class="input-label">View</span>
+        </div>
+        <div class="form-group form-insert">
+            <label class="input-label" for="register-admin">Admin Code</label>
+            <input class="input" required type="text" placeholder="Admin Code" id="register-admin">
+        </div>
+        <button class="btn-green block">
+            <div>Register</div>
+            <div class="spinner"></div>
+        </button>
+    </form>
+
+</main>
+{{> jquery}}
+{{> auth}}

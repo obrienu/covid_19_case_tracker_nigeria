@@ -1,4 +1,4 @@
-@import './config';
+@import "./config";
 
 @mixin easeOut {
   transition: all ease-out 300ms;
@@ -17,7 +17,7 @@ $text-black: rgb(39, 39, 39);
 .borderOrange {
   border-bottom: solid 2px orange;
   @include easeOut();
-  &:hover{
+  &:hover {
     color: orange;
   }
 }
@@ -25,19 +25,17 @@ $text-black: rgb(39, 39, 39);
 .borderGreen {
   border-bottom: solid 2px rgb(13, 221, 13);
   @include easeOut();
-  &:hover{
+  &:hover {
     color: rgb(13, 221, 13);
   }
-
 }
 
 .borderBlue {
   border-bottom: solid 2px rgb(135, 207, 235);
   @include easeOut();
-  &:hover{
+  &:hover {
     color: rgb(135, 207, 235);
-  };
-
+  }
 }
 
 .borderYellow {
@@ -45,8 +43,7 @@ $text-black: rgb(39, 39, 39);
   @include easeOut();
   &:hover {
     color: rgb(255, 230, 0);
-  };
-
+  }
 }
 
 * {
@@ -77,24 +74,24 @@ ul {
   margin: 0;
 }
 
-.header{
- color: #fff;
- background-color: $green;
- padding: 1rem;
- font-size: $large-text;
- text-align: center;
+.header {
+  color: #fff;
+  background-color: $green;
+  padding: 1rem;
+  font-size: $large-text;
+  text-align: center;
 }
 
-.box{
-      width: 80%;
-      margin: 0 auto 3rem;
-      border: solid rgba(128, 128, 128, 0.274) 1px;
-      border-top: 2px solid $green;
-      padding: 1rem;
-      box-shadow: 1px 4px 7px 1px #000000b5;
+.box {
+  width: 80%;
+  margin: 0 auto 3rem;
+  border: solid rgba(128, 128, 128, 0.274) 1px;
+  border-top: 2px solid $green;
+  padding: 1rem;
+  box-shadow: 1px 4px 7px 1px #000000b5;
 }
 
-.box-content{
+.box-content {
   padding: 1rem;
   font-size: $mid-text;
   color: $text-black;
@@ -172,7 +169,7 @@ ul {
     }
   }
 
-  .logo-link{
+  .logo-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -181,21 +178,20 @@ ul {
       height: 2rem;
     }
   }
-
-  
 }
 
 main#home {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
+  min-height: calc(100vh - 5.5rem);
 
   .main-background {
-    background: url('/images/bg.jpg') no-repeat right;
+    background: url("/images/bg.jpg") no-repeat right;
     background-size: cover;
     position: relative;
     height: 15rem;
-    
+
     &::after {
       position: absolute;
       content: "";
@@ -216,26 +212,146 @@ main#home {
     bottom: 1rem;
     left: 1rem;
     z-index: 2;
-
   }
 
   .main-section {
     width: 100%;
     padding-top: 3rem;
-
-    .nat-stat{
-      
-    }
   }
-
 }
 
-#footer{
+main#login {
+  min-height: calc(100vh - 5.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-form {
+    @extend .box;
+    max-width: 30rem;
+  }
+
+  .register-form {
+    @extend .box;
+    max-width: 30rem;
+  }
+}
+/* ********UPDATE PAGE ****************** */
+main#update{
+  @extend main#login;
+
+  .update-form {
+    width: 90vw;
+    margin-bottom: 1rem ;
+  }
+  .update-field{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    .form-group{
+      width: 15rem;
+    }
+  }
+}
+
+#footer {
   height: 2.5rem;
   color: #fff;
   background-color: green;
   text-align: center;
   line-height: 2.5rem;
-} 
+}
 
-@import './responsive';
+/* **********FORM STYLING******************* */
+.form-group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-template-rows: 1.5rem;
+  margin-bottom: 0.5rem;
+  border: solid 1px grey;
+  border-radius: 5px;
+}
+
+.form-group:first-child {
+  margin-top: 1rem;
+}
+
+.form-insert {
+  @extend .form-group;
+  grid-template-columns: max-content auto max-content;
+}
+
+.input-label {
+  line-height: 1.5rem;
+  padding: 0 0.3rem;
+  background-color: lightgrey;
+}
+
+.input {
+  width: 100%;
+  color: rgb(63, 63, 63);
+  outline: none;
+  padding-left: 0.5rem;
+  @include easeOut();
+
+  &:focus {
+    border-bottom: $green solid 2px;
+  }
+}
+
+.btn-green {
+  position: relative;
+  height: 2rem;
+  color: white;
+  padding: 0.5rem;
+  background-color: $green;
+  cursor: pointer;
+  border-radius: 5px;
+  border: solid $green 1px;
+  @include easeOut();
+
+  &:hover {
+    background-color: lighten($green, 40);
+    color: $green;
+  }
+}
+
+.block {
+  width: 100%;
+  display: flex;
+}
+
+.error {
+  background-color: rgb(247, 56, 56);
+  color: white;
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  display: none;
+}
+
+.spinner {
+  position: absolute;
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 50%;
+  border: white solid 2px;
+  border-bottom: $green;
+  top: 0.4rem;
+  right: 6rem;
+  animation: spinner 500ms linear infinite;
+  display: none;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import "./responsive";

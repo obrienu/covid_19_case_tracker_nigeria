@@ -1,0 +1,21 @@
+<main id="login">
+<form class="box login-form">
+    <div class="header">Login</div>
+    <div class="error mt-1"></div>
+    <div class="form-group mt-1">
+        <label class="input-label" for="login-email">Email</label>
+        <input class="input" required placeholder="Email" type="email" id="login-email">
+    </div>
+    <div class="form-group form-insert">
+        <label class="input-label" for="login-password">Password</label>
+        <input class="input" required type="password" placeholder="Password" id="login-password">
+        <span class="input-label">View</span>
+    </div>
+    <button class="btn-green block">
+        <div>Login</div> <div class="spinner"></div>
+    </button>
+</form>
+
+</main>
+{{> jquery}}
+{{> auth}}

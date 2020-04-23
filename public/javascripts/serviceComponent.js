@@ -10,6 +10,7 @@ $(document).ready(() => {
     displayService.populateNatStat(nationalCases);
     displayService.populateStateStat(states);
   };
-
-  handleHomePageData();
+  if (window.location.pathname === '/') {
+    handleHomePageData();
+  }
 });
