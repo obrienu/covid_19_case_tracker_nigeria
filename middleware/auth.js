@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const auth = (req, res, next) => {
   const token = req.header('x-auth-token');
   // check for token
-  if (!token) { return res.status(401).json({ msg: 'No token, authorisation denied' }); }
+  if (!token) { return res.status(401).json({ err: 'No token, authorisation denied' }); }
 
   try {
     // Verify token
@@ -16,7 +16,7 @@ const auth = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
-    res.status(400).json({ msg: 'Invalid token' });
+    res.status(400).json({ err: 'Invalid token' });
   }
 };
 

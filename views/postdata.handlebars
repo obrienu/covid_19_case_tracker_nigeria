@@ -1,0 +1,39 @@
+<main id="update">
+  <form class="update-form mt-1">
+    <div class="header">Update Data</div>
+    <div class="error mt-1"></div>
+    <div class="success mt-1"></div>
+    <div class="update-field">
+      <div class="form-group mt-1">
+        <label class="input-label" for="date"> Date</label>
+        <input class="input" required type="date" id="date">
+      </div>
+      <div class="form-group mt-1">
+        <label class="input-label" for="deaths"> Deaths</label>
+        <input class="input" required type="number" min="0" value="0" id="deaths">
+      </div>
+      <div class="form-group mt-1">
+        <label class="input-label" for="discharged"> Discharged</label>
+        <input class="input" required type="number" min="0" value="0" id="discharged">
+      </div>
+
+      {{#each states}}
+      <div class="form-group mt-1">
+        <label class="input-label" for={{.}}>{{.}}</label>
+        <input class="input states" required type="number" id={{.}} value="0" min="0">
+      </div>
+      {{/each}}
+      <button class="btn-green block mt-1" id="new-update" style="width: 15rem;">
+        <div>New Update</div>
+        <div class="spinner"></div>
+      </button>
+      <button class="btn-green block mt-1" id="update-existing" style="width: 15rem;">
+        <div>Update Existing</div>
+        <div class="spinner"></div>
+      </button>
+    </div>
+  </form>
+
+</main>
+{{> jquery}}
+{{> update}}

@@ -75,15 +75,12 @@ exports.postData = async (req, res) => {
   const { date, states, summary } = cleanData(req.body);
   try {
     const natData = genNatData(summary, date);
-    const newStates = await State.insertMany(states);
-    const newNat = await new National(natData).save();
-    res.status(200).send({
-      national: newNat,
-      reportedCasePerState: newStates,
-    });
+    await State.insertMany(states);
+    await new National(natData).save();
+    res.status(200).json('Data Posted Successfully');
   } catch (err) {
     console.error(`api, ${err}`);
-    res.status(404).send({ err: err.message });
+    res.status(404).json({ err: err.message });
   }
 };
 
@@ -92,16 +89,12 @@ exports.putData = async (req, res) => {
   const { date, states, summary } = cleanData(req.body);
   try {
     const natData = genNatData(summary, date);
-    const deleted = await State.deleteMany({ date });
-    const updatedStates = await State.insertMany(states);
-    const updatedNat = await National.updateOne({ date }, { $set: { ...natData } });
-    res.status(200).send({
-      deleted,
-      updatedStates,
-      updatedNat,
-    });
+    await State.deleteMany({ date });
+    await State.insertMany(states);
+    await National.updateOne({ date }, { $set: { ...natData } });
+    res.status(200).json('Data Updated Successfully');
   } catch (err) {
     console.error(`api, ${err}`);
-    res.status(404).send({ err: err.message });
+    res.status(404).json({ err: err.message });
   }
 };

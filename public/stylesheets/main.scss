@@ -330,6 +330,12 @@ main#update{
   height: 2rem;
   line-height: 2rem;
   display: none;
+  text-align: center;
+}
+
+.success {
+  @extend .error;
+  background-color: $green;
 }
 
 .spinner {
