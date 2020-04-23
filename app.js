@@ -12,9 +12,9 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-const url = process.env.DB_URI;
+// const url = process.env.DB_URI;
 
-mongoose.connect(url, {
+mongoose.connect(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
