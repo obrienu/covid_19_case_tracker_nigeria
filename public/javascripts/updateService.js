@@ -4,7 +4,8 @@ $(document).ready(() => {
   const date = $('#date');
   const deaths = $('#deaths');
   const discharged = $('#discharged');
-  const url = 'https://nigeria-covid19-api.herokuapp.com/api/v1/nigeria/covid-19/';
+  //  const url = 'https://nigeria-covid19-api.herokuapp.com/api/v1/nigeria/covid-19/';
+  const url = 'http://localhost:3000/api/v1/nigeria/covid-19/';
 
   const getData = () => {
     const obj = {};

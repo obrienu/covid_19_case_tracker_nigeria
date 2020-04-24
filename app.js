@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
-// require('dotenv').config();
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 

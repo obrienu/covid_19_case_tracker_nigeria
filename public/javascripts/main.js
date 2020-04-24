@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 $(document).ready(() => {
-
   const menuBtn = $('.menu-btn');
   const menu = $('#nav');
   let menuIsOpen = false;
