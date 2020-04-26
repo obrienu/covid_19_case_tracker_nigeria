@@ -172,7 +172,13 @@ const generateStatePipeLine = (query, params) => {
       },
     },
   ];
-  if (queryObj) pipeline.push(queryObj);
+  const sortPipeline = {
+    $sort: {
+      date: -1,
+    },
+  };
+
+  if (queryObj) pipeline.push(queryObj, sortPipeline);
   if (query.accumulate) return [...pipeline, ...cummPipline];
   return pipeline;
 };
@@ -195,6 +201,19 @@ const generateRegionPipeLine = (query, params) => {
       },
     },
   ];
+  const groupByDate = {
+    $group: {
+      _id: '$date',
+      cases: {
+        $sum: '$cases',
+      },
+    },
+  };
+  const addRegionField = {
+    $addFields: {
+      date: '$_id',
+    },
+  };
   const cummPipline = [
     {
       $group: {
@@ -210,7 +229,12 @@ const generateRegionPipeLine = (query, params) => {
       },
     },
   ];
-  if (queryObj) pipeline.push(queryObj);
+  const sortPipeline = {
+    $sort: {
+      date: -1,
+    },
+  };
+  if (queryObj) pipeline.push(queryObj, groupByDate, addRegionField, sortPipeline);
   if (query.accumulate) return [...pipeline, ...cummPipline];
   return pipeline;
 };
@@ -237,9 +261,9 @@ const generateNatPipeline = (querys) => {
         _id: false,
       },
     },
+
   ];
-  if (Object.keys(querys).length === 0
-    || ((Object.keys(querys).length === 1) && !querys.accumulate)) return pipeline;
+  if (Object.keys(querys).length === 0) return pipeline;
 
   if ((Object.keys(querys).length === 1)
     && querys.accumulate) return [...pipeline, ...cummPipline];
@@ -247,7 +271,7 @@ const generateNatPipeline = (querys) => {
   const query = handleQuery(querys);
   if (querys.accumulate) return [query, ...cummPipline];
 
-  return [query];
+  return [query, { $sort: { date: 1 } }];
 };
 
 const genPutPipeline = (states) => states.map((state) => ({
