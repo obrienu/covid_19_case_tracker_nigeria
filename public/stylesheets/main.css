@@ -290,6 +290,79 @@ main#update .update-field .form-group, main#update .update-field .form-insert {
   width: 15rem;
 }
 
+/* ****************STAT PAGE ****************** */
+main#stat {
+  position: relative;
+  min-height: calc(100vh - 5.5rem);
+}
+
+main#stat .stat-header {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: lightgray;
+  height: 3rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+main#stat .stat-header .stat-link {
+  line-height: 3rem;
+  padding: 0 0.5rem;
+  background-color: #fff;
+  background-color: lightgray;
+  border-bottom: grey solid 2px;
+  cursor: pointer;
+  -webkit-transition: all ease-out 300ms;
+  transition: all ease-out 300ms;
+}
+
+main#stat .stat-header .blank {
+  background-color: lightgray;
+  width: 100%;
+  border-bottom: grey solid 2px;
+}
+
+main#stat .stat-header .active-page, main#stat .stat-header .stat-link:hover {
+  background-color: #fff;
+  border: grey solid 2px;
+  border-bottom: none;
+  border-top: none;
+  color: #0ddd0d;
+}
+
+main#stat .stat-header .short {
+  display: none;
+}
+
+main#stat .pages {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+}
+
+main#stat .pages .stat-main {
+  position: relative;
+}
+
+main#stat .pages .svg {
+  position: relative;
+  bottom: 2px;
+}
+
+main#stat .hide {
+  display: none;
+}
+
 #footer {
   height: 2.5rem;
   color: #fff;
@@ -467,7 +540,7 @@ main#update .update-field .form-group, main#update .update-field .form-insert {
   }
   main#home .main-section {
     -ms-grid-row: 1;
-    -ms-grid-column: 1;
+    -ms-grid-column: 2;
     grid-area: main;
     overflow-y: auto;
   }
@@ -479,43 +552,71 @@ main#update .update-field .form-group, main#update .update-field .form-insert {
     line-height: 2.5rem;
     border-top: 2px solid #ffe600;
   }
-}
-
-/* **********FORM STYLING******************* */
-.mt-1 {
-  margin-top: 1rem;
-}
-
-.form-group, .form-insert {
-  -ms-grid-rows: 2rem;
-      grid-template-rows: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.input-label {
-  line-height: 2rem;
-  padding: 0 0.3rem;
-  background-color: lightgrey;
-}
-
-.btn-green {
-  color: white;
-  padding: 0.5rem;
-  background-color: #0ddd0d;
-  cursor: pointer;
-  border-radius: 5px;
-  border: solid #0ddd0d 1px;
-  -webkit-transition: all ease-out 300ms;
-  transition: all ease-out 300ms;
-}
-
-.btn-green:hover {
-  background-color: #bbfbbb;
-  color: #0ddd0d;
-}
-
-.block {
-  display: block;
-  width: 100%;
+  /* **********FORM STYLING******************* */
+  .mt-1 {
+    margin-top: 1rem;
+  }
+  .form-group, .form-insert {
+    -ms-grid-rows: 2rem;
+        grid-template-rows: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .input-label {
+    line-height: 2rem;
+    padding: 0 0.3rem;
+    background-color: lightgrey;
+  }
+  .btn-green {
+    color: white;
+    padding: 0.5rem;
+    background-color: #0ddd0d;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid #0ddd0d 1px;
+    -webkit-transition: all ease-out 300ms;
+    transition: all ease-out 300ms;
+  }
+  .btn-green:hover {
+    background-color: #bbfbbb;
+    color: #0ddd0d;
+  }
+  .block {
+    display: block;
+    width: 100%;
+  }
+  main#stat {
+    /* .svg{
+      height:calc(100vh - 9rem) ;
+      width: 100%;
+    } */
+  }
+  main#stat .stat-header .short {
+    display: inline-block;
+  }
+  main#stat .pages {
+    -ms-grid-columns: 25rem auto;
+        grid-template-columns: 25rem auto;
+    -ms-grid-rows: auto;
+        grid-template-rows: auto;
+        grid-template-areas: "side main";
+  }
+  main#stat .pages .stat-side {
+    height: calc(100vh - 9rem);
+    overflow-y: scroll;
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: side;
+  }
+  main#stat .pages .stat-main {
+    height: calc(100vh - 9rem);
+    overflow-y: scroll;
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: main;
+  }
+  main#stat .pages .svg {
+    position: absolute;
+    bottom: 2px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

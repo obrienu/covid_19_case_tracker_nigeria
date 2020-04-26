@@ -1,4 +1,266 @@
-<main class="row" id="home">
+<main id="stat">
+    {{!-- --------------------------------------------- --}}
+    {{!-- ------------Nav------------- --}}
+    {{!-- --------------------------------------------- --}}
 
+    <nav class="stat-header">
+        <div class="stat-link active-page" id="national">National</div>
+        <div class="stat-link" id="regional">Regional</div>
+        <div class="stat-link" id="state">State</div>
+        <div class="blank" id="state"></div>
+    </nav>
 
+    {{!-- --------------------------------------------- --}}
+    {{!-- ------------National PAGE------------- --}}
+    {{!-- --------------------------------------------- --}}
+
+    <div id="national-page" class="pages">
+        <div class="stat-side">
+            <section class="box mt-1" style="margin-top: 1rem;">
+                <header class="header">
+                    National Stats
+                </header>
+
+                <form id="national-form">
+                    <div class="form-group mt-1">
+                        <label class="input-label" for="">
+                            Search Type
+                        </label>
+                        <select class="input" name="" id="nat-search-type">
+                            <option value="">...Select Search Type</option>
+                            <option value="range">Range</option>
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-1 hide" id="nat-date">
+                        <label class="input-label" for="nat-stat-date">Date</label>
+                        <input class="input" type="date" id="nat-stat-date">
+                    </div>
+                    <div id="nat-range" class="hide">
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="nat-stat-from">From</label>
+                            <input class="input" type="date" id="nat-stat-from">
+                        </div>
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="nat-stat-to">To</label>
+                            <input class="input" type="date" id="nat-stat-to">
+                        </div>
+                    </div>
+                    <button class="btn-green block hide" id="nat-btn">
+                        <div>Get Data</div>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+            </section>
+
+            <div class="error hide">
+
+            </div>
+
+            <section class="box nat-stat hide" id="national-stat">
+                <header class="header">
+                    National Stats
+                </header>
+                <main>
+                    <div class="box-content nat-cases">
+                        <span>Reported Cases:</span> <span class="nat-value"></span>
+                    </div>
+                    <div class="box-content nat-cases">
+                        <span>Discharged:</span> <span class="nat-value"></span>
+                    </div>
+                    <div class="box-content nat-cases">
+                        <span>Deaths:</span> <span class="nat-value"></span>
+                    </div>
+                </main>
+            </section>
+        </div>
+        <div class="stat-main">
+            <div id="nat-chart"></div>
+        </div>
+    </div>
+
+    {{!-- --------------------------------------------- --}}
+    {{!-- ------------REGIONAL PAGE------------- --}}
+    {{!-- --------------------------------------------- --}}
+
+    <div id="regional-page" class="pages hide">
+        <div class="stat-side">
+            <section class="box mt-1">
+                <header class="header" id="reg-header">
+                    Regional Stats
+                </header>
+
+                <form id="regional-form">
+                    <div class="form-group mt-1">
+                        <label class="input-label" for="">
+                            Region
+                        </label>
+                        <select class="input" name="" id="reg-name">
+                            <option value="">...Select Region</option>
+                            <option value="North Central">North Central</option>
+                            <option value="North East">North East</option>
+                            <option value="North West">North West</option>
+                            <option value="South East">South East</option>
+                            <option value="South West">South West</option>
+                            <option value="South South">South South</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-1">
+                        <label class="input-label" for="">
+                            Search Type
+                        </label>
+                        <select class="input" name="" id="reg-search-type">
+                            <option value="">...Select Search Type</option>
+                            <option value="range">Range</option>
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-1 hide" id="reg-date">
+                        <label class="input-label" for="reg-stat-date">Date</label>
+                        <input class="input" type="date" id="reg-stat-date">
+                    </div>
+                    <div id="reg-range" class="hide">
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="reg-stat-from">From</label>
+                            <input class="input" type="date" id="reg-stat-from">
+                        </div>
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="reg-stat-to">To</label>
+                            <input class="input" type="date" id="reg-stat-to">
+                        </div>
+                    </div>
+                    <button class="btn-green block hide" id="reg-btn">
+                        <div>Get Data</div>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+
+            </section>
+            <div class="error hide">
+
+            </div>
+
+            <section class="box reg-stat hide" id="regional-stat">
+                <header class="header">
+                    Regional Stats
+                </header>
+                <main>
+                    <div class="box-content reg-cases">
+                        <span>Reported Case:</span> <span class="reg-value"></span>
+                    </div>
+                </main>
+            </section>
+        </div>
+        <div class="stat-main">
+            <div id="reg-chart"></div>
+        </div>
+    </div>
+    {{!-- --------------------------------------------- --}}
+    {{!-- ------------STATE PAGE------------- --}}
+    {{!-- --------------------------------------------- --}}
+    <div id="state-page" class="pages hide">
+
+        <div class="stat-side">
+            <section class="box mt-1">
+                <header class="header" id="state-header">
+                    State Stats
+                </header>
+                <form id="state-form">
+                    <div class="form-group mt-1">
+                        <label class="input-label" for="">
+                            State
+                        </label>
+                        <select required class="input" name="" id="state-name">
+                            <option value="">...Select State</option>
+                            <option value="Abuja">Abuja FCT</option>
+                            <option value="Abia">Abia</option>
+                            <option value="Adamawa">Adamawa</option>
+                            <option value="Akwa Ibom">Akwa Ibom</option>
+                            <option value="Anambra">Anambra</option>
+                            <option value="Bauchi">Bauchi</option>
+                            <option value="Bayelsa">Bayelsa</option>
+                            <option value="Benue">Benue</option>
+                            <option value="Borno">Borno</option>
+                            <option value="Cross River">Cross River</option>
+                            <option value="Delta">Delta</option>
+                            <option value="Ebonyi">Ebonyi</option>
+                            <option value="Edo">Edo</option>
+                            <option value="Ekiti">Ekiti</option>
+                            <option value="Enugu">Enugu</option>
+                            <option value="Gombe">Gombe</option>
+                            <option value="Imo">Imo</option>
+                            <option value="Jigawa">Jigawa</option>
+                            <option value="Kaduna">Kaduna</option>
+                            <option value="Kano">Kano</option>
+                            <option value="Katsina">Katsina</option>
+                            <option value="Kebbi">Kebbi</option>
+                            <option value="Kogi">Kogi</option>
+                            <option value="Kwara">Kwara</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Nassarawa">Nassarawa</option>
+                            <option value="Niger">Niger</option>
+                            <option value="Ogun">Ogun</option>
+                            <option value="Ondo">Ondo</option>
+                            <option value="Osun">Osun</option>
+                            <option value="Oyo">Oyo</option>
+                            <option value="Plateau">Plateau</option>
+                            <option value="Rivers">Rivers</option>
+                            <option value="Sokoto">Sokoto</option>
+                            <option value="Taraba">Taraba</option>
+                            <option value="Yobe">Yobe</option>
+                            <option value="Zamfara">Zamfara</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-1">
+                        <label class="input-label" for="">
+                            Search Type
+                        </label>
+                        <select class="input" name="" id="state-search-type">
+                            <option value="">...Select Search Type</option>
+                            <option value="range">Range</option>
+                            <option value="date">Date</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-1 hide" id="state-date">
+                        <label class="input-label" for="state-stat-date">Date</label>
+                        <input class="input" type="date" id="state-stat-date">
+                    </div>
+                    <div id="state-range" class="hide">
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="state-stat-from">From</label>
+                            <input class="input" type="date" id="state-stat-from">
+                        </div>
+                        <div class="form-group mt-1">
+                            <label class="input-label" for="state-stat-to">To</label>
+                            <input class="input" type="date" id="state-stat-to">
+                        </div>
+                    </div>
+                    <button class="btn-green block hide" id="state-btn">
+                        <div>Get Data</div>
+                        <div class="spinner"></div>
+                    </button>
+                </form>
+            </section>
+            <div class="error hide">
+            </div>
+            <section class="box state-stat hide" id="state-stat">
+                <header class="header">
+                    State Stats
+                </header>
+                <main>
+                    <div class="box-content state-cases">
+                        <span>Reported Case:</span> <span class="state-value"></span>
+                    </div>
+                </main>
+            </section>
+        </div>
+        <div class="stat-main">
+            <div id="state-chart"></div>
+        </div>
+
+    </div>
 </main>
+{{> jquery}}
+{{> fetch}}

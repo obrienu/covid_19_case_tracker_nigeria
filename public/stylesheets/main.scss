@@ -237,21 +237,86 @@ main#login {
   }
 }
 /* ********UPDATE PAGE ****************** */
-main#update{
+main#update {
   @extend main#login;
 
   .update-form {
     width: 90vw;
-    margin-bottom: 1rem ;
+    margin-bottom: 1rem;
   }
-  .update-field{
+  .update-field {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
 
-    .form-group{
+    .form-group {
       width: 15rem;
     }
+  }
+}
+
+/* ****************STAT PAGE ****************** */
+main#stat {
+  position: relative;
+  min-height: calc(100vh - 5.5rem);
+
+  .stat-header {
+    width: 100%;
+    display: flex;
+    background-color: rgb(211, 211, 211);
+    height: 3rem;
+    flex-flow: row nowrap;
+    justify-content: right;
+
+    .stat-link {
+      line-height: 3rem;
+      padding: 0 0.5rem;
+      background-color: #fff;
+      background-color: rgb(211, 211, 211);
+      border-bottom: grey solid 2px;
+      cursor: pointer;
+      @include easeOut();
+      &:hover {
+        @extend .active-page;
+      }
+    }
+
+    .blank {
+      background-color: rgb(211, 211, 211);
+      width: 100%;
+      border-bottom: grey solid 2px;
+    }
+
+    .active-page {
+      background-color: #fff;
+      border: grey solid 2px;
+      border-bottom: none;
+      border-top: none;
+      color: $green;
+    }
+
+    .short {
+      display: none;
+    }
+  }
+
+  .pages {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+
+    .stat-main {
+      position: relative;
+    }
+
+   .svg{
+     position: relative;
+     bottom: 2px;
+   }
+  }
+
+  .hide {
+    display: none;
   }
 }
 
