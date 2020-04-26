@@ -4,6 +4,8 @@
 class Update {
   constructor(url) {
     this.url = url;
+    // eslint-disable-next-line prefer-destructuring
+    this.form = document.querySelectorAll('.update-form')[0];
     this.handleSuccessDisplay = this.handleSuccessDisplay.bind(this);
   }
 
@@ -54,6 +56,7 @@ class Update {
         return false;
       }
       this.handleSuccessDisplay(result);
+      this.form.reset();
       return true;
     } catch (err) {
       return this.hideErrorDisplay(err);
@@ -75,6 +78,7 @@ class Update {
         return false;
       }
       this.handleSuccessDisplay(result);
+      this.form.reset();
       return true;
     } catch (err) {
       return this.hideErrorDisplay(err);
