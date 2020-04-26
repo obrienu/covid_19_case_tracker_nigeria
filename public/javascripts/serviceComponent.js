@@ -9,7 +9,7 @@ $(document).ready(() => {
 
   const handleHomePageData = async () => {
     const { nationalCases, states } = await dataService.getData('present');
-    displayService.populateNatStat(nationalCases);
+    displayService.populateStat(nationalCases, 'national');
     displayService.populateStateStat(states);
   };
   if (window.location.pathname === '/') {
