@@ -421,6 +421,7 @@ main#stat .hide {
   color: white;
   padding: 0.5rem;
   background-color: #0ddd0d;
+  text-align: center;
   cursor: pointer;
   border-radius: 5px;
   border: solid #0ddd0d 1px;
