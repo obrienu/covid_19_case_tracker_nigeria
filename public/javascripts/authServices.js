@@ -17,7 +17,7 @@ $(document).ready(() => {
       $('#login-email').val('');
       user.stopSpinner();
       window.location = 'http://localhost:3000/updates';
-//      window.location = 'https://nigeria-covid19-api.herokuapp.com/updates';
+    //  window.location = 'https://nigeria-covid19-api.herokuapp.com/updates';
     }
   });
 
@@ -30,7 +30,7 @@ $(document).ready(() => {
     const adminCode = $('#register-admin').val();
     let isRegistered;
     const user = new Auth('http://localhost:3000/user/register');
-  //  const user = new Auth('https://nigeria-covid19-api.herokuapp.com/user/register');
+    //  const user = new Auth('https://nigeria-covid19-api.herokuapp.com/user/register');
     user.loader();
     const isValid = user.validateRegisterInputs(name, email, password, cpassword, adminCode);
     if (isValid) {
@@ -44,7 +44,7 @@ $(document).ready(() => {
       $('#register-name').val('');
       user.stopSpinner();
       window.location = 'http://localhost:3000/updates';
-//      window.location = 'https://nigeria-covid19-api.herokuapp.com/updates';
+    //      window.location = 'https://nigeria-covid19-api.herokuapp.com/updates';
     }
   });
 });

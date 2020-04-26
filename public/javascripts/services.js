@@ -141,8 +141,6 @@ class Interface {
     }
     document.querySelector(selector).innerHTML = '';
     const svg = d3.select(selector)
-      .style('overflow-x', 'scroll')
-      .style('-webkit-overflow-scrolling', 'touch')
       .append('svg')
       .attr('viewBox', [0, 0, width, height])
       .attr('class', 'svg');
