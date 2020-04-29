@@ -1,38 +1,36 @@
-
-    <main class="row" id="home">
-        <div class="main-background">
-          <div class="bg-text">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem accusamus culpa veniam incidunt! Harum ipsa facilis rerum ducimus libero alias.
-          </div>
+<main class="row" id="home">
+  <div class="main-background">
+    <div class="bg-text">
+      Naija Covid 19 Stat app gives you daily update on reported covid 19 cases across the country. Stats can be
+      accessed on a National, Geo-political and State level. All statistics are as reported by the National
+      Center for Disease Control and are prone to any errors reported by the agency.
+    </div>
+  </div>
+  <div class="main-section">
+    <section class="box nat-stat" id="national-stat">
+      <header class="header">
+        National Stats
+      </header>
+      <main>
+        <div class="box-content nat-cases">
+          <span>Reported Cases:</span> <span class="nat-value"></span>
         </div>
-        <div class="main-section">
-          <section class="box nat-stat" id="national-stat">
-            <header class="header">
-              National Stats
-            </header>
-            <main>
-              <div class="box-content nat-cases">
-                <span>Reported Cases:</span> <span class="nat-value"></span>
-              </div>
-              <div class="box-content nat-cases">
-                <span>Discharged:</span> <span class="nat-value"></span>
-              </div>
-              <div class="box-content nat-cases">
-                <span>Deaths:</span> <span class="nat-value"></span>
-              </div>
-            </main>
-          </section>
-          <section class="box state-stat">
-            <header class="header">
-              States Stats
-            </header>
-            <main id="home-state">
-             
-            </main>
-          </section>
+        <div class="box-content nat-cases">
+          <span>Discharged:</span> <span class="nat-value"></span>
         </div>
+        <div class="box-content nat-cases">
+          <span>Deaths:</span> <span class="nat-value"></span>
+        </div>
+      </main>
+    </section>
+    <section class="box state-stat">
+      <header class="header">
+        States Stats
+      </header>
+      <main id="home-state">
 
-    </main>
- 
-{{> jquery}}
-{{> fetch}}
+      </main>
+    </section>
+  </div>
+
+</main>

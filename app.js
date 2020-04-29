@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -6,6 +7,11 @@ const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.dev');
+
+const compiler = webpack(config);
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
@@ -37,8 +43,25 @@ app.use(express.json());
 app.use(boolParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  etag: true,
+  lastModified: true,
+  // eslint-disable-next-line no-shadow
+  setHeaders: (res, path) => {
+    const hashRegExp = new RegExp('\\.[0-9a-f]{8}\\.');
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    } else if (hashRegExp.test(path)) {
+      res.setHeader('Cache-Control', 'max-age=31536000');
+    }
+  },
+}));
 
+/* if (process.env.NODE !== 'production') {
+  app.use(webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+  }));
+} */
 
 app.use('/api/v1/nigeria/covid-19/', indexRouter);
 app.use('/user', require('./routes/user'));
