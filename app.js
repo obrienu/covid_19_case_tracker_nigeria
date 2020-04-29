@@ -7,12 +7,12 @@ const mongoose = require('mongoose');
 const boolParser = require('express-query-boolean');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.dev');
+// const webpack = require('webpack');
+// const webpackDevMiddleware = require('webpack-dev-middleware');
+// const config = require('./webpack.dev');
 
-const compiler = webpack(config);
-require('dotenv').config();
+// const compiler = webpack(config);
+// require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
