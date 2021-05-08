@@ -19,7 +19,7 @@
     "express": "~4.16.1",
     "express-handlebars": "^4.0.3",
     "express-query-boolean": "^2.0.0",
-    "handlebars": "^4.7.6",
+    "handlebars": "^4.7.7",
     "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.9",
