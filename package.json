@@ -16,7 +16,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "express-handlebars": "^4.0.3",
     "express-query-boolean": "^2.0.0",
     "handlebars": "^4.7.6",
